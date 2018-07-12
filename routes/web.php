@@ -23,27 +23,27 @@ Route::get('/abcde', function() {
 	return 'abc';
 })->middleware('auth');
 
-Route::get('/admin', function() {
-	return view('myvue');
-})->middleware('auth');
 
 
-Route::get('/dashboard', function() {
-	return view('dashboard');
-});
+Route::prefix('admin')->group(function () {
 
-Route::get('/transactions', function() {
-	return view('transactions');
-});
+    Route::get('/dashboard', function() {
+		return view('admin/dashboard');
+	});
 
-Route::get('/products', function() {
-	return view('products');
-});
+	Route::get('/transactions', function() {
+		return view('admin/transactions');
+	});
 
-Route::get('/members', function() {
-	return view('members');
-});
+	Route::get('/products', function() {
+		return view('admin/products');
+	});
 
-Route::get('/reports', function() {
-	return view('reports');
+	Route::get('/members', function() {
+		return view('admin/members');
+	});
+
+	Route::get('/reports', function() {
+		return view('admin/reports');
+	});
 });

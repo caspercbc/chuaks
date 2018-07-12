@@ -28,9 +28,6 @@
               'dashboard', 'members', 'transactions', 'products', 'reports'
             ]
           }
-        },
-        mounted() {
-            console.log(this.currentTab);
         }
     }
 </script>
