@@ -30,6 +30,6 @@ const app = new Vue({
     	"header-component": HeaderComponent,
     	"test-component": TestComponent,
     	"sidebar": SidebarComponent,
-    	"user-list": UserListComponent,
+    	"user-list": UserListComponent
     }
 });

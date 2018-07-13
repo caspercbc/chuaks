@@ -23,9 +23,11 @@ Route::get('/abcde', function() {
 	return 'abc';
 })->middleware('auth');
 
-
-
 Route::prefix('admin')->group(function () {
+
+	Route::get('/', function () {
+	    return redirect('admin/dashboard');
+	});
 
     Route::get('/dashboard', function() {
 		return view('admin/dashboard');
@@ -40,6 +42,10 @@ Route::prefix('admin')->group(function () {
 	});
 
 	Route::get('/members', function() {
+		return view('admin/members');
+	});
+
+	Route::get('/members/:id', function() {
 		return view('admin/members');
 	});
 
