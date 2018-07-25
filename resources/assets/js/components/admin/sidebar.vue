@@ -2,17 +2,8 @@
   <nav class="col-sm-2 d-none d-sm-block bg-light sidebar">
     <div class="sidebar-sticky">
       <ul class="nav flex-column">
-        <li v-for="post in posts" class="nav-item">
-          <div v-if="currentTab == post">
-            <a class="nav-link active" :href="currentTab">
-              {{ post }} <span class="sr-only">(current)</span>
-            </a>
-          </div>
-          <div v-else>
-            <a class="nav-link" :href="post">
-              {{ post }}
-            </a>
-          </div>
+        <li v-for="(tab, index) in tabs" class="nav-item">
+          <router-link class="nav-link" v-bind:to="tabUrl(index)">{{ tab }}</router-link>
         </li>
       </ul>
     </div>
@@ -21,14 +12,20 @@
 
 <script>
     export default {
-        props: ['current-tab'],
-        data: function() {
-          return {
-            posts: [
-              'dashboard', 'members', 'transactions', 'products', 'reports'
-            ]
-          }
+      data: function() {
+        return {
+          tabs: [
+            'dashboard', 'members', 'rewards', 'transactions', 'reports'
+          ]
         }
+      },
+      methods: {
+        // a computed getter
+        tabUrl: function (index) {
+          // `this` points to the vm instance
+          return '/' + this.tabs[index];
+        }
+      }
     }
 </script>
 
@@ -83,4 +80,9 @@
     font-size: .75rem;
     text-transform: uppercase;
   }
+
+  .router-link-active {
+    color: rgba(0,0,225,1) !important;
+  }
+
 </style>

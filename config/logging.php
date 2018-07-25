@@ -35,12 +35,18 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['error', 'debug'],
         ],
 
-        'single' => [
+        'error' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/error.log'),
+            'level' => 'error',
+        ],
+
+        'debug' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/debug.log'),
             'level' => 'debug',
         ],
 

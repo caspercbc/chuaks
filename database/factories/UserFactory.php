@@ -23,14 +23,35 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Transaction::class, function (Faker $faker) {
+$factory->define(App\Reward::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'image_url' => 'https://placehold.it/200x200',
+        'description' => $faker->text,
+        'point' => ($faker->numberBetween($min = 1, $max = 100) * 100)
+    ];
+});
+
+$factory->define(App\PointTransaction::class, function (Faker $faker) {
 
 	$createdAt = $faker->dateTimeBetween('-1 years','+1 year', null);
 	$updatedAt = Carbon::instance($createdAt)->addDays(rand(0,300));
 
+    $rewardId = $faker->boolean();
+    $point;
+    if( $rewardId ){
+        $rewardId = $faker->numberBetween($min = 1, $max = 17);
+        $point = $faker->numberBetween($min = -100, $max = -1) * 100;
+    } else {
+        $rewardId = null;
+        $point = $faker->numberBetween($min = 1, $max = 100) * 100;
+    }
+
 	return [
 		'user_id' => $faker->numberBetween($min = 1, $max = 100),
-		'point' => $faker->numberBetween($min = 10, $max = 1000),
+		'reward_id' => $rewardId,
+		'point' => $point,
+        'description' => $faker->sentence,
 		'created_at' => $createdAt,
 		'updated_at' => $updatedAt
 	];

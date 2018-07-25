@@ -28,8 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function points()
+    public function pointTransactions()
     {
-        return $this->hasMany(Point::class);
+        return $this->hasMany(PointTransaction::class);
     }
 }

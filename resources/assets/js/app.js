@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -19,17 +18,19 @@ import UserListComponent from './components/UserList.vue';
 import HeaderComponent from './components/Header.vue';
 import TestComponent from './components/TestComponent.vue';
 import SidebarComponent from './components/Sidebar.vue';
+import AnotherTestComponent from './components/anothertestcomponent.vue';
+import MembersComponent from './components/members.vue';
+import MemberComponent from './components/member.vue';
 
-
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('spinner', require('./components/spinner.vue'));
 
 const app = new Vue({
-    el: '#app',
-    components: {
-    	"header-component": HeaderComponent,
-    	"test-component": TestComponent,
-    	"sidebar": SidebarComponent,
-    	"user-list": UserListComponent
-    }
+  el: '#app',
+  components: {
+    "header-component": HeaderComponent,
+    "sidebar": SidebarComponent,
+    "test-component": TestComponent,
+    "user-list": UserListComponent
+  }
 });
+

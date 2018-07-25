@@ -8,7 +8,7 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> -->
 
         <!-- Styles -->
         <style>
@@ -91,5 +91,11 @@
                 </div>
             </div>
         </div>
+
+        <form action="http://localhost:8000/test" method="POST">
+
+            <button>Upload</button>
+            <!-- {{ csrf_field() }} -->
+        </form>
     </body>
 </html>

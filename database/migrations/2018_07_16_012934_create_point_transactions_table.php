@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePointsTable extends Migration
+class CreatePointTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,21 @@ class CreatePointsTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('points')) {
-            return;
-        }
+        // if (Schema::hasTable('points')) {
+        //     return;
+        // }
+        
+        Schema::create('point_transactions', function (Blueprint $table) {
+            $table->increments('id');
 
-        Schema::create('points', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('reward_id')->nullable();
 
             $table->integer('point');
+            $table->string('description')->nullable();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-
-            $table->primary(['user_id', 'point', 'created_at']);
         });
     }
 
@@ -36,6 +38,6 @@ class CreatePointsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('points');
+        Schema::dropIfExists('point_transactions');
     }
 }

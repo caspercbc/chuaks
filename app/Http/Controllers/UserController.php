@@ -1,59 +1,65 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Services\UserService;
 use App\User;
 
 class UserController extends Controller
 {
-    public function index()
+    private $userService;
+
+    public function __construct(UserService $userService)
     {
-    	return User::all();
+        $this->userService = $userService;
     }
 
     public function user(User $user)
     {
-    	return $user;
+        return $this->userService->getUser($user);
     }
 
-    public function details(User $user)
+    public function index()
     {
-    	$res = $user->toArray();
-    	$total = $user->points()->selectRaw('sum(point) as total_points')->first();
-		$res['total_points'] = $total['total_points'];
-
-		return response()->json($res);
+        return $this->userService->getUsers();
     }
 
     public function store()
     {
-     	$user = new User;
-
-		$user->name = request()->name;
-		$user->email = request()->email;
-		$user->password = Hash::make(request()->password);
-		$user->save();
-
-    	return response()->json(['message' => 'User added']);
+     	return $this->userService->addUser();
     }
 
     public function update(User $user)
     {
-    	$user->update([
-    		'name' => request()->name,
-    		'email' => request()->email,
-    		'password' => Hash::make(request()->password)
-    	]);
-
-    	return response()->json(['message' => 'User updated']);
+    	return $this->userService->editUser($user);
     }
 
     public function destroy(User $user)
     {
-    	$user->delete();
+    	return $this->userService->deleteUser();
+    }
 
-    	return response()->json(['message' => 'User deleted']);
+    public function adjustPoint(User $user)
+    {
+        return $this->userService->adjustPoint($user);
+    }
+
+    public function editPoint(User $user)
+    {
+        return $this->userService->editPoint($user);
+    }
+
+    public function getPointTransactions(User $user)
+    {
+        return $this->userService->getPointTransactions($user);
+    }
+
+    public function getPtWithReward(User $user)
+    {
+        return $this->userService->getPtWithReward($user);
+    }
+
+    public function addUserWithPoint()
+    {
+        return $this->userService->addUserWithPoint();
     }
 }
